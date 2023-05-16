@@ -31,13 +31,12 @@ class UsersController < ApplicationController
     else
       render "edit"
     end
-  #   # @user = User.find(params[:id])
-  #   if @user.update(user_params)
-  #     redirect_to user_path(@user.id), notice: "You have updated user successfully."
-  #   else
-  #     render :edit
-  #   end
-  # end
+  end
+  
+  def daily_posts
+    user = User.find(params[:user_id])
+    @books = user.books.where(created_at: params[:created_at].to_date.all_day)
+    render :daily_posts_form
   end
   
   private
